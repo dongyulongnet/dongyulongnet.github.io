@@ -1,0 +1,397 @@
+<!DOCTYPE html><html lang="[&quot;zh-CN&quot;,&quot;en&quot;,&quot;default&quot;]" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Nodejs环境及Npm应用 | Dong Yulong</title><meta name="keywords" content="npm,cnpm,镜像"><meta name="author" content="Dong Yulong"><meta name="copyright" content="Dong Yulong"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Node.js 环境搭建及 npm 命令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nodejs环境及Npm应用">
+<meta property="og:url" content="https://dongyulong.online/posts/e79e71a5/index.html">
+<meta property="og:site_name" content="Dong Yulong">
+<meta property="og:description" content="Node.js 环境搭建及 npm 命令">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://dongyulong.online/files/cover_img/Nodejs.jpg">
+<meta property="article:published_time" content="2022-07-24T07:02:00.000Z">
+<meta property="article:modified_time" content="2022-08-16T00:57:41.390Z">
+<meta property="article:author" content="Dong Yulong">
+<meta property="article:tag" content="npm">
+<meta property="article:tag" content="cnpm">
+<meta property="article:tag" content="镜像">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dongyulong.online/files/cover_img/Nodejs.jpg"><link rel="shortcut icon" href="/files/image/them/favicon.ico"><link rel="canonical" href="https://dongyulong.online/posts/e79e71a5/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Nodejs环境及Npm应用',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: undefined,
+  isToc: true,
+  postUpdate: '2022-08-16 08:57:41'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_3575074_85klqajr0hl.css"><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Dong Yulong" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/files/image/them/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">42</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-shouye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw iconfont icon-java1"></i><span> Java</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/interview/%E6%80%9D%E6%83%B3/"><i class="fa-fw iconfont icon-A-sixiang"></i><span> 思想</span></a></li><li><a class="site-page child" href="/interview/Java/%E9%9B%86%E5%90%88/"><i class="fa-fw iconfont icon-bpstudio-yunjiagoushejigongju"></i><span> 集合</span></a></li><li><a class="site-page child" href="/interview/Java/%E7%BA%BF%E7%A8%8B/"><i class="fa-fw iconfont icon-gongzuotai-thread"></i><span> 线程</span></a></li><li><a class="site-page child" href="/interview/Java/%E8%99%9A%E6%8B%9F%E6%9C%BA/"><i class="fa-fw iconfont icon-xuniji"></i><span> 虚拟机</span></a></li><li><a class="site-page child" href="/interview/Java/IO/"><i class="fa-fw iconfont icon-exclaimination"></i><span> IO</span></a></li><li><a class="site-page child" href="/interview/Spring/"><i class="fa-fw iconfont icon-bxl-spring-boot"></i><span> Spring</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw iconfont icon-wenzhang"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw iconfont icon-categories"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw iconfont icon-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw iconfont icon-guidang"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw iconfont icon-Tools"></i><span> 收藏</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/files/cover_img/Nodejs&amp;npm.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Dong Yulong</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-shouye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw iconfont icon-java1"></i><span> Java</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/interview/%E6%80%9D%E6%83%B3/"><i class="fa-fw iconfont icon-A-sixiang"></i><span> 思想</span></a></li><li><a class="site-page child" href="/interview/Java/%E9%9B%86%E5%90%88/"><i class="fa-fw iconfont icon-bpstudio-yunjiagoushejigongju"></i><span> 集合</span></a></li><li><a class="site-page child" href="/interview/Java/%E7%BA%BF%E7%A8%8B/"><i class="fa-fw iconfont icon-gongzuotai-thread"></i><span> 线程</span></a></li><li><a class="site-page child" href="/interview/Java/%E8%99%9A%E6%8B%9F%E6%9C%BA/"><i class="fa-fw iconfont icon-xuniji"></i><span> 虚拟机</span></a></li><li><a class="site-page child" href="/interview/Java/IO/"><i class="fa-fw iconfont icon-exclaimination"></i><span> IO</span></a></li><li><a class="site-page child" href="/interview/Spring/"><i class="fa-fw iconfont icon-bxl-spring-boot"></i><span> Spring</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw iconfont icon-wenzhang"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw iconfont icon-categories"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw iconfont icon-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw iconfont icon-guidang"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw iconfont icon-Tools"></i><span> 收藏</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Nodejs环境及Npm应用</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-07-24T07:02:00.000Z" title="发表于 2022-07-24 15:02:00">2022-07-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-16T00:57:41.390Z" title="更新于 2022-08-16 08:57:41">2022-08-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Nodejs/">Nodejs</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="leancloud_visitors" id="/posts/e79e71a5/" data-flag-title="Nodejs环境及Npm应用"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span class="leancloud-visitors-count"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/posts/e79e71a5/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/posts/e79e71a5/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Nodejs安装环境"><a href="#Nodejs安装环境" class="headerlink" title="Nodejs安装环境"></a>Nodejs安装环境</h1><h2 id="下载-Node-js-Linux-64位二进制安装包。"><a href="#下载-Node-js-Linux-64位二进制安装包。" class="headerlink" title="下载 Node.js Linux 64位二进制安装包。"></a>下载 <code>Node.js Linux 64</code>位二进制安装包。</h2><p>如果需要其他版本去<a target="_blank" rel="noopener external nofollow noreferrer" href="https://nodejs.org/dist/">官网仓库</a>自己查找并修改为对应版本地址</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://nodejs.org/dist/v14.18.1/node-v14.18.1-linux-x64.tar.xz</span><br></pre></td></tr></table></figure>
+
+<h2 id="解压安装包"><a href="#解压安装包" class="headerlink" title="解压安装包"></a>解压安装包</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar xvf node-v14.18.1-linux-x64.tar.xz</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建软链接"><a href="#创建软链接" class="headerlink" title="创建软链接"></a>创建软链接</h2><p>成功创建软链接后，即可在云服务器任意目录下使用 <code>node</code> 及 <code>npm</code> 命令。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -s /home/ubuntu/node-v14.18.1-linux-x64/bin/node /usr/local/bin/node</span><br><span class="line">ln -s /home/ubuntu/node-v14.18.1-linux-x64/bin/npm /usr/local/bin/npm</span><br></pre></td></tr></table></figure>
+
+<h2 id="看-Node-js-及-npm-版本信息"><a href="#看-Node-js-及-npm-版本信息" class="headerlink" title="看 Node.js 及 npm 版本信息"></a>看 <code>Node.js</code> 及 <code>npm</code> 版本信息</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+<p><img src="/files/post_img/Post-Nodejs&Npm.png" alt="Node.js和npm关系"></p>
+<h1 id="Npm镜像源设置"><a href="#Npm镜像源设置" class="headerlink" title="Npm镜像源设置"></a>Npm镜像源设置</h1><h2 id="查看当前镜像源"><a href="#查看当前镜像源" class="headerlink" title="查看当前镜像源"></a>查看当前镜像源</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config get registry</span><br></pre></td></tr></table></figure>
+
+<h2 id="或查询所有配置"><a href="#或查询所有配置" class="headerlink" title="或查询所有配置"></a>或查询所有配置</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm config list</span><br><span class="line">npm config ls -l</span><br></pre></td></tr></table></figure>
+
+<h2 id="设置镜像"><a href="#设置镜像" class="headerlink" title="设置镜像"></a>设置镜像</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry http://mirrors.cloud.tencent.com/npm/</span><br></pre></td></tr></table></figure>
+
+<h2 id="常用镜像地址"><a href="#常用镜像地址" class="headerlink" title="常用镜像地址"></a>常用镜像地址</h2><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#淘宝 </span><br><span class="line">https://registry.npm.taobao.org/</span><br><span class="line">https://registry.npmmirror.com</span><br><span class="line">#腾讯</span><br><span class="line">http://mirrors.cloud.tencent.com/npm/</span><br><span class="line">#华为云</span><br><span class="line">https://mirrors.huaweicloud.com/repository/npm/</span><br><span class="line">#官方</span><br><span class="line">https://registry.npmjs.org/</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除镜像"><a href="#删除镜像" class="headerlink" title="删除镜像"></a>删除镜像</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config rm registry</span><br></pre></td></tr></table></figure>
+
+<p>查看npm配置文件,删除镜像配置即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config edit</span><br></pre></td></tr></table></figure>
+
+<h1 id="cnpm使用"><a href="#cnpm使用" class="headerlink" title="cnpm使用"></a><code>cnpm</code>使用</h1><p>安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry=https://registry.npmmirror.com</span><br></pre></td></tr></table></figure>
+
+<p>使用,用法和<code>npm</code>大同小异</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install xxx</span><br></pre></td></tr></table></figure>
+
+<h1 id="npm环境参数"><a href="#npm环境参数" class="headerlink" title="npm环境参数"></a><code>npm</code>环境参数</h1><h2 id="save-dev"><a href="#save-dev" class="headerlink" title="--save-dev"></a><code>--save-dev</code></h2><p>安装包到<code>devDependencies</code>标签下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm i packageName --save-dev</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">-S dependencies 生产环境下依赖安装(--save)，默认安装</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">-D devDependencies 开发环境下依赖安装(--save-dev)</span></span><br><span class="line">npm update packageName [-D | -S]</span><br></pre></td></tr></table></figure>
+
+<h2 id="production"><a href="#production" class="headerlink" title="--production"></a><code>--production</code></h2><p>只有<code>dependencies</code>标签下的依赖包会被安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --production</span><br></pre></td></tr></table></figure>
+
+<h2 id="only-dev"><a href="#only-dev" class="headerlink" title="--only=dev"></a><code>--only=dev</code></h2><p>只有<code>devDependencies</code>标签下的依赖包会被安装<br>另外：<code>--dev，它的效果与--only=dev相同，但已经被废弃，请使用--only=dev代替</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --only=dev</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="npm-i-与npm-update之间的区别"><a href="#npm-i-与npm-update之间的区别" class="headerlink" title="npm i 与npm update之间的区别"></a><code>npm i</code> 与<code>npm update</code>之间的区别</h1><h1 id="package-lock-json-文件存在"><a href="#package-lock-json-文件存在" class="headerlink" title="package-lock.json 文件存在"></a><code>package-lock.json</code> 文件存在</h1><p><code>npm i</code> 会按照 <code>package-lock.json</code> 对应包版本进行安装，不会自动升级<br><code>npm update</code> 会按照 <code>package.json</code> 对应包版本前缀升级规范安装到最新到版</p>
+<h1 id="package-lock-json-文件不存在"><a href="#package-lock-json-文件不存在" class="headerlink" title="package-lock.json 文件不存在"></a><code>package-lock.json</code> 文件不存在</h1><p><code>npm i</code> 会按照 <code>package.json</code> 对应包版本前缀升级规范安装到最新到版本<br><code>npm update</code>会忽略 devDependencies 下的对应包更新安装,添加了 -D 才会在安装更新 <code>devDependencies</code> 下对应的依赖包</p>
+<h1 id="npm安装固定版本依赖"><a href="#npm安装固定版本依赖" class="headerlink" title="npm安装固定版本依赖"></a><code>npm</code>安装固定版本依赖</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install xxx@x.x.x  --save</span><br></pre></td></tr></table></figure>
+
+<h1 id="npm安装github仓库代码"><a href="#npm安装github仓库代码" class="headerlink" title="npm安装github仓库代码"></a><code>npm</code>安装github仓库代码</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install &lt;git remote url&gt;</span><br></pre></td></tr></table></figure>
+<p>支持的协议有 git、git+ssh、git+https…… <code>如果使用ssh协议需要配置ssh协议密钥</code></p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;protocol&gt;://[&lt;user&gt;[:&lt;password&gt;]@]&lt;hostname&gt;[:&lt;port&gt;][:][/]&lt;path&gt;[#&lt;commit-ish&gt;]</span><br><span class="line">&lt;protocol&gt; is one of git, git+ssh, git+http, git+https, or git+file. If no &lt;commit-ish&gt; is specified, then master is used</span><br></pre></td></tr></table></figure>
+<p>示例:<br><code>#branch</code>:表示需要安装的分支号<br><code>#branch</code>:表示需要安装的tag</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install git+ssh://git@github.com:dongyulongnet/hexo-bridge.git#main --unsafe-perm --save-dev </span><br></pre></td></tr></table></figure>
+
+
+<h1 id="npm-install常见问题解决办法"><a href="#npm-install常见问题解决办法" class="headerlink" title="npm install常见问题解决办法"></a><code>npm install</code>常见问题解决办法</h1><ul>
+<li>1.删除<code>node_modules</code>文件夹重新执行可以解决大多数问题</li>
+<li>2.某个包的问题可以使用<code>npm rebuild xxx</code></li>
+<li>3.没有权限,可以增加<code>--unsafe-perm</code>。<code>npm</code> 出于安全考虑不支持以 <code>root</code> 用户运行，即使你用 <code>root</code> 用户身份运行了，<code>npm</code> 会自动转成一个叫 <code>nobody</code> 的用户来运行，而这个用户几乎没有任何权限。这样的话如果你脚本里有一些需要权限的操作，比如写文件（尤其是写 <code>/root/.node-gyp</code>），就会崩掉了。<br>为了避免这种情况，要么按照 <code>npm</code> 的规矩来，专门建一个用于运行 <code>npm</code> 的高权限用户；要么加 <code>--unsafe-perm</code> 参数，这样就不会切换到 <code>nobody</code> 上，运行时是哪个用户就是哪个用户，即使是 <code>root</code>。如:<code>...permission to access the dev dir...</code> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.npmjs.com/cli/v8/using-npm/config">官网文档</a></li>
+<li>4.不要提交<code>package-lock.json</code>,环境、系统等一个或多个因素不同都可能会出现使用不同的版本</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/zoepriselife316/article/details/103178021">npm 镜像源的设置和删除</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://cloud.tencent.com/developer/article/1372949">npm使用国内镜像加速的几种方法</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://npmmirror.com/">npmmirror 中国镜像站</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://cloud.tencent.com/document/product/213/38237">手动搭建 Node.js 环境</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://juejin.cn/post/6913833065647341581">npm 更新依赖包</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://ghrhome.gitbooks.io/node_express_react/content/shi-yongnpm-an-zhuang-github-cang-ku-zhong-de-dai-ma.html">使用npm安装github仓库中的代码</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://dongyulong.online">Dong Yulong</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://dongyulong.online/posts/e79e71a5/">https://dongyulong.online/posts/e79e71a5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://dongyulong.online" target="_blank">Dong Yulong</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/npm/">npm</a><a class="post-meta__tags" href="/tags/cnpm/">cnpm</a><a class="post-meta__tags" href="/tags/%E9%95%9C%E5%83%8F/">镜像</a></div><div class="post_share"><div class="social-share" data-image="/files/cover_img/Nodejs.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/174e52/"><img class="prev-cover" src="/files/cover_img/Linux-Process.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Linux进程(后台)启动及终止</div></div></a></div><div class="next-post pull-right"><a href="/posts/e8fb5456/"><img class="next-cover" src="/files/cover_img/Linux-Files.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Linux文件(夹)归属及权限修改</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Valine</span><span class="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Nodejs%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83"><span class="toc-number">1.</span> <span class="toc-text">Nodejs安装环境</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD-Node-js-Linux-64%E4%BD%8D%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E8%A3%85%E5%8C%85%E3%80%82"><span class="toc-number">1.1.</span> <span class="toc-text">下载 Node.js Linux 64位二进制安装包。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%8E%8B%E5%AE%89%E8%A3%85%E5%8C%85"><span class="toc-number">1.2.</span> <span class="toc-text">解压安装包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%BD%AF%E9%93%BE%E6%8E%A5"><span class="toc-number">1.3.</span> <span class="toc-text">创建软链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9C%8B-Node-js-%E5%8F%8A-npm-%E7%89%88%E6%9C%AC%E4%BF%A1%E6%81%AF"><span class="toc-number">1.4.</span> <span class="toc-text">看 Node.js 及 npm 版本信息</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Npm%E9%95%9C%E5%83%8F%E6%BA%90%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">Npm镜像源设置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E9%95%9C%E5%83%8F%E6%BA%90"><span class="toc-number">2.1.</span> <span class="toc-text">查看当前镜像源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%96%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89%E9%85%8D%E7%BD%AE"><span class="toc-number">2.2.</span> <span class="toc-text">或查询所有配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E9%95%9C%E5%83%8F"><span class="toc-number">2.3.</span> <span class="toc-text">设置镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E9%95%9C%E5%83%8F%E5%9C%B0%E5%9D%80"><span class="toc-number">2.4.</span> <span class="toc-text">常用镜像地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E9%95%9C%E5%83%8F"><span class="toc-number">2.5.</span> <span class="toc-text">删除镜像</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cnpm%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">cnpm使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#npm%E7%8E%AF%E5%A2%83%E5%8F%82%E6%95%B0"><span class="toc-number">4.</span> <span class="toc-text">npm环境参数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#save-dev"><span class="toc-number">4.1.</span> <span class="toc-text">--save-dev</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#production"><span class="toc-number">4.2.</span> <span class="toc-text">--production</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#only-dev"><span class="toc-number">4.3.</span> <span class="toc-text">--only&#x3D;dev</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#npm-i-%E4%B8%8Enpm-update%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">5.</span> <span class="toc-text">npm i 与npm update之间的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#package-lock-json-%E6%96%87%E4%BB%B6%E5%AD%98%E5%9C%A8"><span class="toc-number">6.</span> <span class="toc-text">package-lock.json 文件存在</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#package-lock-json-%E6%96%87%E4%BB%B6%E4%B8%8D%E5%AD%98%E5%9C%A8"><span class="toc-number">7.</span> <span class="toc-text">package-lock.json 文件不存在</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#npm%E5%AE%89%E8%A3%85%E5%9B%BA%E5%AE%9A%E7%89%88%E6%9C%AC%E4%BE%9D%E8%B5%96"><span class="toc-number">8.</span> <span class="toc-text">npm安装固定版本依赖</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#npm%E5%AE%89%E8%A3%85github%E4%BB%93%E5%BA%93%E4%BB%A3%E7%A0%81"><span class="toc-number">9.</span> <span class="toc-text">npm安装github仓库代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#npm-install%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="toc-number">10.</span> <span class="toc-text">npm install常见问题解决办法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">11.</span> <span class="toc-text">参考</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('/files/cover_img/Nodejs&amp;npm.png')"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2022 By Dong Yulong</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="https://beian.miit.gov.cn/" rel="external nofollow noreferrer" target="_blank" style="color:#f72b07"> <img class="icp-icon" src="/files/image/them/icp.png"/><span>备案号:京ICP备2022020892号-1</span></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'jQFJ7kWQ84M1iue5gPhpw88Q-gzGzoHsz',
+      appKey: '9B4rhGzXDnjtHbicyotBmHLw',
+      avatar: 'monsterid',
+      serverURLs: 'https://waline.dongyulong.online',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script>function addGitalkSource () {
+  const ele = document.createElement('link')
+  ele.rel = 'stylesheet'
+  ele.href= 'https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css'
+  document.getElementsByTagName('head')[0].appendChild(ele)
+}
+
+function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: '380b87852ebd7003908f',
+      clientSecret: '490a7d907f4843e7290019040c5c96a9e501cc70',
+      repo: 'gittalk',
+      owner: 'dongyulongnet',
+      admin: ['dongyulongnet'],
+      id: '2aa1ce888645c2bc1f615117b2bbc7e1',
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    addGitalkSource()
+    getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Valine' === 'Gitalk' || !false) {
+  if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

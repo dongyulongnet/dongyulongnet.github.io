@@ -1,0 +1,486 @@
+<!DOCTYPE html><html lang="[&quot;zh-CN&quot;,&quot;en&quot;,&quot;default&quot;]" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>常用Java工具 | Dong Yulong</title><meta name="keywords" content="Java"><meta name="author" content="Dong Yulong"><meta name="copyright" content="Dong Yulong"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、JDK工具分类  Create and Build Applications（创建和构建应用程序）  Security  Internationalization（国际化）  Remote Method Invocation (RMI)  Java IDL and RMI-IIOP  Deploy Applications and Applets  Java Web Start  Monit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用Java工具">
+<meta property="og:url" content="https://dongyulong.online/posts/f5fbf762/index.html">
+<meta property="og:site_name" content="Dong Yulong">
+<meta property="og:description" content="一、JDK工具分类  Create and Build Applications（创建和构建应用程序）  Security  Internationalization（国际化）  Remote Method Invocation (RMI)  Java IDL and RMI-IIOP  Deploy Applications and Applets  Java Web Start  Monit">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://dongyulong.online/files/image/cover_top/Java/java-cpu.jpg">
+<meta property="article:published_time" content="2020-05-08T02:19:21.000Z">
+<meta property="article:modified_time" content="2022-08-16T00:57:41.390Z">
+<meta property="article:author" content="Dong Yulong">
+<meta property="article:tag" content="JDK工具">
+<meta property="article:tag" content="jconsole">
+<meta property="article:tag" content="jvisualvm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dongyulong.online/files/image/cover_top/Java/java-cpu.jpg"><link rel="shortcut icon" href="/files/image/them/favicon.ico"><link rel="canonical" href="https://dongyulong.online/posts/f5fbf762/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '常用Java工具',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: undefined,
+  isToc: true,
+  postUpdate: '2022-08-16 08:57:41'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_3575074_85klqajr0hl.css"><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Dong Yulong" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/files/image/them/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">42</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-shouye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw iconfont icon-java1"></i><span> Java</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/interview/%E6%80%9D%E6%83%B3/"><i class="fa-fw iconfont icon-A-sixiang"></i><span> 思想</span></a></li><li><a class="site-page child" href="/interview/Java/%E9%9B%86%E5%90%88/"><i class="fa-fw iconfont icon-bpstudio-yunjiagoushejigongju"></i><span> 集合</span></a></li><li><a class="site-page child" href="/interview/Java/%E7%BA%BF%E7%A8%8B/"><i class="fa-fw iconfont icon-gongzuotai-thread"></i><span> 线程</span></a></li><li><a class="site-page child" href="/interview/Java/%E8%99%9A%E6%8B%9F%E6%9C%BA/"><i class="fa-fw iconfont icon-xuniji"></i><span> 虚拟机</span></a></li><li><a class="site-page child" href="/interview/Java/IO/"><i class="fa-fw iconfont icon-exclaimination"></i><span> IO</span></a></li><li><a class="site-page child" href="/interview/Spring/"><i class="fa-fw iconfont icon-bxl-spring-boot"></i><span> Spring</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw iconfont icon-wenzhang"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw iconfont icon-categories"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw iconfont icon-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw iconfont icon-guidang"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw iconfont icon-Tools"></i><span> 收藏</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/%E5%B8%B8%E7%94%A8Java%E5%B7%A5%E5%85%B7/top.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Dong Yulong</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-shouye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw iconfont icon-java1"></i><span> Java</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/interview/%E6%80%9D%E6%83%B3/"><i class="fa-fw iconfont icon-A-sixiang"></i><span> 思想</span></a></li><li><a class="site-page child" href="/interview/Java/%E9%9B%86%E5%90%88/"><i class="fa-fw iconfont icon-bpstudio-yunjiagoushejigongju"></i><span> 集合</span></a></li><li><a class="site-page child" href="/interview/Java/%E7%BA%BF%E7%A8%8B/"><i class="fa-fw iconfont icon-gongzuotai-thread"></i><span> 线程</span></a></li><li><a class="site-page child" href="/interview/Java/%E8%99%9A%E6%8B%9F%E6%9C%BA/"><i class="fa-fw iconfont icon-xuniji"></i><span> 虚拟机</span></a></li><li><a class="site-page child" href="/interview/Java/IO/"><i class="fa-fw iconfont icon-exclaimination"></i><span> IO</span></a></li><li><a class="site-page child" href="/interview/Spring/"><i class="fa-fw iconfont icon-bxl-spring-boot"></i><span> Spring</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw iconfont icon-wenzhang"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw iconfont icon-categories"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw iconfont icon-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw iconfont icon-guidang"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw iconfont icon-Tools"></i><span> 收藏</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">常用Java工具</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-05-08T02:19:21.000Z" title="发表于 2020-05-08 10:19:21">2020-05-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-16T00:57:41.390Z" title="更新于 2022-08-16 08:57:41">2022-08-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/">Java</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="leancloud_visitors" id="/posts/f5fbf762/" data-flag-title="常用Java工具"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span class="leancloud-visitors-count"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/posts/f5fbf762/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/posts/f5fbf762/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><hr>
+<h1 id="一、JDK工具分类"><a href="#一、JDK工具分类" class="headerlink" title="一、JDK工具分类"></a>一、JDK工具分类</h1><ul>
+<li><input disabled="" type="checkbox"> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/intro.html#sthref19"><em><strong>Create and Build Applications（创建和构建应用程序）</strong></em></a></li>
+<li><input disabled="" type="checkbox"> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/intro.html#sthref20"><em><strong>Security</strong></em></a></li>
+<li><input disabled="" type="checkbox"> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/intro.html#sthref21">Internationalization（国际化）</a></li>
+<li><input disabled="" type="checkbox"> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/intro.html#sthref22">Remote Method Invocation (RMI)</a></li>
+<li><input disabled="" type="checkbox"> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/intro.html#sthref23">Java IDL and RMI-IIOP</a></li>
+<li><input disabled="" type="checkbox"> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/intro.html#sthref24">Deploy Applications and Applets</a></li>
+<li><input disabled="" type="checkbox"> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/intro.html#sthref25">Java Web Start</a></li>
+<li><input checked="" disabled="" type="checkbox"> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/intro.html#sthref26"><strong>Monitor Java Applications（监控Java程序）</strong></a></li>
+<li><input checked="" disabled="" type="checkbox"> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/intro.html#sthref27"><strong>Monitor the Java Virtual Machine（监控JVM）</strong></a></li>
+<li><input disabled="" type="checkbox"> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/intro.html#sthref28">Web Services</a></li>
+<li><input checked="" disabled="" type="checkbox"> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/intro.html#sthref29"><strong>Troubleshooting（故障排查）</strong></a></li>
+<li><input disabled="" type="checkbox"> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/intro.html#sthref30">Scripting（脚本编写）</a></li>
+</ul>
+<h1 id="二、常用工具详解"><a href="#二、常用工具详解" class="headerlink" title="二、常用工具详解"></a>二、常用工具详解</h1><h3 id="2-1-监控Java程序工具（GUI工具）"><a href="#2-1-监控Java程序工具（GUI工具）" class="headerlink" title="2.1 监控Java程序工具（GUI工具）"></a>2.1 监控Java程序工具（GUI工具）</h3><table>
+<thead>
+<tr>
+<th align="center">工具</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><a target="_blank" rel="noopener external nofollow noreferrer" href="http://docs.oracle.com/javase/8/docs/technotes/tools/unix/jconsole.html">jconsole</a></td>
+<td>jconsole命令启动一个图形控制台工具，使您可以监视和管理本地或远程计算机上的Java应用程序和虚拟机。</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener external nofollow noreferrer" href="http://docs.oracle.com/javase/8/docs/technotes/tools/unix/jvisualvm.html">jvisualvm</a></td>
+<td>Java VisualVM是一个直观的图形用户界面，当基于Java技术的应用程序（Java应用程序）在指定的Java虚拟机（JVM）上运行时，可提供有关它们的详细信息。 Java VisualVM之所以命名，是因为Java VisualVM可视地提供了有关JVM软件的信息。<br/><br/>Java VisualVM将多个监视，故障排除和性能分析实用程序组合到一个工具中。 例如，<strong>独立工具jmap，jinfo，jstat和jstack提供的大多数功能已集成到Java VisualVM中</strong>。 可以将其他功能（例如jconsole命令提供的功能）添加为可选插件。<br/><br/>Java VisualVM对Java应用程序开发人员进行应用程序故障排除以及监视和改善应用程序的性能很有用。 Java VisualVM使开发人员能够生成和分析堆转储，跟踪内存泄漏，执行和监视垃圾回收以及执行轻量级内存和CPU性能分析。 您可以使用插件扩展Java VisualVM功能。 例如，可通过MBeans选项卡和JConsole插件包装器插件来使用jconsole命令的大多数功能。 您可以从标准Java VisualVM插件的目录中选择，方法是依次选择“工具”和“ Java VisualVM”菜单中的“插件”。<br/><strong>在jVv的插件库中，可以安装btrace插件。安装后，可以在程序运行的过程中，直接进行代码更改。</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="2-2-监控JVM的工具"><a href="#2-2-监控JVM的工具" class="headerlink" title="2.2 监控JVM的工具"></a>2.2 监控JVM的工具</h3><h5 id="2-2-1-jps"><a href="#2-2-1-jps" class="headerlink" title="2.2.1 jps**"></a>2.2.1 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jps.html#CHDCGECD">jps**</a></h5><p> <strong>jps是jdk提供的一个查看当前java进程的小工具，</strong> 可以看做是JavaVirtual Machine Process Status Tool的缩写。非常简单实用。</p>
+<ul>
+<li>命令的使用</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">usage: jps [-help]</span><br><span class="line">       jps [options] [hostid]</span><br><span class="line"></span><br><span class="line">Definitions:</span><br><span class="line">    &lt;hostid&gt;:      &lt;hostname&gt;[:&lt;port&gt;]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>options参数解析</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-q #仅输出VM标识符，不包括classname,jar name,arguments in main method </span><br><span class="line">-m #输出main method的参数 </span><br><span class="line">-l #输出完全的包名，应用主类名，jar的完全路径名 </span><br><span class="line">-v #输出jvm参数 </span><br><span class="line">-V #输出通过flag文件传递到JVM中的参数(.hotspotrc文件或-XX:Flags=所指定的文件 </span><br><span class="line">-Joption #传递参数到vm,例如:-J-Xms512m</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>命令示例</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">jps</span><br><span class="line"></span><br><span class="line">13264 RemoteMavenServer</span><br><span class="line">23808 LiveApplication</span><br><span class="line">24552 Jps</span><br><span class="line">2552</span><br><span class="line">23852 Launcher</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">jps -l</span><br><span class="line"></span><br><span class="line">13264 org.jetbrains.idea.maven.server.RemoteMavenServer</span><br><span class="line">23808 com.guwukeji.live.LiveApplication</span><br><span class="line">22740 sun.tools.jps.Jps</span><br><span class="line">2552</span><br><span class="line">23852 org.jetbrains.jps.cmdline.Launcher</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-2-2-jstat"><a href="#2-2-2-jstat" class="headerlink" title="2.2.2 jstat***"></a>2.2.2 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jstat.html#BEHHGFAE">jstat***</a></h5><p>Jstat是JDK自带的一个轻量级小工具。主要利用JVM内建的指令对Java应用程序的资源和性能进行实时的命令行的监控，包括了对<strong>Heap size</strong>和<strong>垃圾回收状况</strong>的监控。可见，Jstat是轻量级的、专门针对JVM的工具，非常适用</p>
+<ul>
+<li>命令的使用</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Usage: jstat -help|-options</span><br><span class="line">       jstat -&lt;option&gt; [-t] [-h&lt;lines&gt;] &lt;vmid&gt; [&lt;interval&gt; [&lt;count&gt;]]</span><br><span class="line">       </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">lines：标题行之间的样本数；interval：统计间隔时长单位，默认毫秒；count：统计总行数</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-t:表示将时间戳（系统启动之后到现在的时间差）显示在第一列</span></span><br><span class="line">Definitions:</span><br><span class="line">  &lt;option&gt;      An option reported by the -options option</span><br><span class="line">  &lt;vmid&gt;        Virtual Machine Identifier. A vmid takes the following form:</span><br><span class="line">                     &lt;lvmid&gt;[@&lt;hostname&gt;[:&lt;port&gt;]]</span><br><span class="line">                Where &lt;lvmid&gt; is the local vm identifier for the target</span><br><span class="line">                Java virtual machine, typically a process id; &lt;hostname&gt; is</span><br><span class="line">                the name of the host running the target Java virtual machine;</span><br><span class="line">                and &lt;port&gt; is the port number for the rmiregistry on the</span><br><span class="line">                target host. See the jvmstat documentation for a more complete</span><br><span class="line">                description of the Virtual Machine Identifier.</span><br><span class="line">  &lt;lines&gt;       Number of samples between header lines.</span><br><span class="line">  &lt;interval&gt;    Sampling interval. The following forms are allowed:</span><br><span class="line">                    &lt;n&gt;[&quot;ms&quot;|&quot;s&quot;]</span><br><span class="line">                Where &lt;n&gt; is an integer and the suffix specifies the units as</span><br><span class="line">                milliseconds(&quot;ms&quot;) or seconds(&quot;s&quot;). The default units are &quot;ms&quot;.</span><br><span class="line">  &lt;count&gt;       Number of samples to take before terminating.</span><br><span class="line">  -J&lt;flag&gt;      Pass &lt;flag&gt; directly to the runtime system.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>options参数</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-class #显示有关类加载器行为的统计信息。</span><br><span class="line">-compiler #显示有关Java HotSpot VM即时编译器行为的统计信息。</span><br><span class="line">-gc #显示有关垃圾收集堆的行为的统计信息。</span><br><span class="line">-gccapacity #堆内存统计</span><br><span class="line">-gccause #显示关于垃圾收集统计信息的摘要(与-gcutil相同)，以及最后一次垃圾收集事件和当前(如果适用)垃圾收集事件的原因。</span><br><span class="line">-gcmetacapacity #元数据空间统计</span><br><span class="line">-gcnew #新生代垃圾回收统计</span><br><span class="line">-gcnewcapacity #新生代内存空间统计</span><br><span class="line">-gcold #老年代垃圾回收统计</span><br><span class="line">-gcoldcapacity #老年代内存空间统计</span><br><span class="line">-gcutil #总结垃圾回收统计</span><br><span class="line">-printcompilation #显示Java HotSpot VM编译方法的统计信息</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>命令示例</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">jstat -gc -t -h3 23808 1s -1 </span><br><span class="line"></span><br><span class="line">Timestamp        S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU    CCSC   CCSU   YGC     YGCT    FGC    FGCT     GCT</span><br><span class="line">        93199.5 10752.0 512.0   0.0   160.0  126976.0 85702.0   146944.0   38935.9   57216.0 54180.4 7808.0 7264.1     39    0.207   2      0.069    0.276</span><br><span class="line">        93200.5 10752.0 512.0   0.0   160.0  126976.0 85702.0   146944.0   38935.9   57216.0 54180.4 7808.0 7264.1     39    0.207   2      0.069    0.276</span><br><span class="line">        93201.5 10752.0 512.0   0.0   160.0  126976.0 85702.0   146944.0   38935.9   57216.0 54180.4 7808.0 7264.1     39    0.207   2      0.069    0.276</span><br><span class="line">Timestamp        S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU    CCSC   CCSU   YGC     YGCT    FGC    FGCT     GCT</span><br><span class="line">        93202.5 10752.0 512.0   0.0   160.0  126976.0 85702.0   146944.0   38935.9   57216.0 54180.4 7808.0 7264.1     39    0.207   2      0.069    0.276</span><br><span class="line">        93203.5 10752.0 512.0   0.0   160.0  126976.0 85702.0   146944.0   38935.9   57216.0 54180.4 7808.0 7264.1     39    0.207   2      0.069    0.276</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">jstat -gc 23808 1s 3</span><br><span class="line"></span><br><span class="line"> S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU    CCSC   CCSU   YGC     YGCT    FGC    FGCT     GCT</span><br><span class="line">10752.0 512.0   0.0   160.0  126976.0 103758.3  146944.0   38935.9   57216.0 54180.4 7808.0 7264.1     39    0.207   2      0.069    0.276</span><br><span class="line">10752.0 512.0   0.0   160.0  126976.0 103758.3  146944.0   38935.9   57216.0 54180.4 7808.0 7264.1     39    0.207   2      0.069    0.276</span><br><span class="line">10752.0 512.0   0.0   160.0  126976.0 103758.3  146944.0   38935.9   57216.0 54180.4 7808.0 7264.1     39    0.207   2      0.069    0.276</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>显示结果解析</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">- <span class="variable constant_">S0C</span>：第一个幸存区的大小</span><br><span class="line">- <span class="variable constant_">S1C</span>：第二个幸存区的大小</span><br><span class="line">- <span class="variable constant_">S0U</span>：第一个幸存区的使用大小</span><br><span class="line">- <span class="variable constant_">S1U</span>：第二个幸存区的使用大小</span><br><span class="line">- <span class="variable constant_">EC</span>：伊甸园区的大小</span><br><span class="line">- <span class="variable constant_">EU</span>：伊甸园区的使用大小</span><br><span class="line">- <span class="variable constant_">OC</span>：老年代大小</span><br><span class="line">- <span class="variable constant_">OU</span>：老年代使用大小</span><br><span class="line">- <span class="variable constant_">MC</span>：方法区大小</span><br><span class="line">- <span class="variable constant_">MU</span>：方法区使用大小</span><br><span class="line">- <span class="attr">CCSC</span>:压缩类空间大小</span><br><span class="line">- <span class="attr">CCSU</span>:压缩类空间使用大小</span><br><span class="line">- <span class="variable constant_">YGC</span>：年轻代垃圾回收次数</span><br><span class="line">- <span class="variable constant_">YGCT</span>：年轻代垃圾回收消耗时间</span><br><span class="line">- <span class="variable constant_">FGC</span>：老年代垃圾回收次数</span><br><span class="line">- <span class="variable constant_">FGCT</span>：老年代垃圾回收消耗时间</span><br><span class="line">- <span class="variable constant_">GCT</span>：垃圾回收消耗总时间</span><br><span class="line">- <span class="variable constant_">NGCMN</span>：新生代最小容量</span><br><span class="line">- <span class="variable constant_">NGCMX</span>：新生代最大容量</span><br><span class="line">- <span class="variable constant_">NGC</span>：当前新生代容量</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-2-3-jstatd"><a href="#2-2-3-jstatd" class="headerlink" title="2.2.3 jstatd"></a>2.2.3 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jstatd.html#BABEHFHF">jstatd</a></h5><p>jstatd是一个基于RMI（Remove Method Invocation）的服务程序，<strong>它用于监控基于HotSpot的JVM中资源的创建及销毁，并且提供了一个远程接口允许远程的监控工具连接到本地的JVM执行命令。</strong></p>
+<p>jstatd是基于RMI的，所以在运行jstatd的服务器上必须存在RMI注册中心，如果没有通过选项”-p port”指定要连接的端口，jstatd会尝试连接RMI注册中心的默认端口。后面会谈到如何连接到一个默认的RMI内部注册中心，如何禁止默认的RMI内部注册中心的创建，以及如何启动一个外部注册中心</p>
+<ul>
+<li>options</li>
+</ul>
+<p>jstatd 命令行参数可以是任何顺序的，如果出现冗余或相互冲突的参数，最后一个参数优先。</p>
+<p>-nr: 当没找到rmi registry服务，在jstatd内部不会试图创建rim registry.</p>
+<p>-p:指定注册的rmi registry服务器端口，如果没有找到在此端口监听的registry服务，并且没有指定参数-nr，将会在jstatd内部以指定的端口创建registry.</p>
+<p>-n rminame :指定绑定到rim registry中远程服务对象的名称，默认为JStatRemoteHost；如果同一台主机上同时运行了多个jstatd服务，rminame可以用于唯一确定一个jstatd服务；这里需要注意一下，如果开启了这个选项，那么监控客户端远程连接时，必须同时指定hostid及vmid，才可以唯一确定要连接的服务</p>
+<p> -Joption: 用于传递jvm选项到由javac调用的java加载器中，例如，“-J-Xms48m”将把启动内存设置为48M，使用-J选项可以非常方便的向基于Java的开发的底层虚拟机应用程序传递参数。</p>
+<h5 id="2-2-4-jmc"><a href="#2-2-4-jmc" class="headerlink" title="2.2.4 jmc"></a>2.2.4 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jmc.html#BCGGHHDD">jmc</a></h5><p>Java Mission Control requires a commercial license for use in production。具有商业许可证才能使用。</p>
+<hr>
+<h3 id="2-3-故障排查工具"><a href="#2-3-故障排查工具" class="headerlink" title="2.3 故障排查工具"></a>2.3 故障排查工具</h3><h5 id="2-3-1-jcmd"><a href="#2-3-1-jcmd" class="headerlink" title="2.3.1 jcmd***"></a>2.3.1 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jcmd.html#CIHEEDIB">jcmd***</a></h5><p>在JDK 1.7之后，新增了一个命令行工具jcmd。它是一个多功能工具，<strong>可以用来导出堆，查看java进程，导出线程信息，执行GC</strong>等。</p>
+<p>jcmd实用程序用于将诊断命令请求发送到JVM。 <strong>它必须在运行JVM的同一台计算机上使用</strong>，并且必须具有用于启动JVM的相同有效用户和组标识符。</p>
+<ul>
+<li>使用</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Usage: jcmd &lt;pid | main class&gt; &lt;command ...|PerfCounter.print|-f file&gt;</span><br><span class="line">   or: jcmd -l</span><br><span class="line">   or: jcmd -h</span><br><span class="line"></span><br><span class="line">  command must be a valid jcmd command for the selected jvm.</span><br><span class="line">  Use the command &quot;help&quot; to see which commands are available.</span><br><span class="line">  If the pid is 0, commands will be sent to all Java processes.</span><br><span class="line">  The main class argument will be used to match (either partially</span><br><span class="line">  or fully) the class used to start Java.</span><br><span class="line">  If no options are given, lists Java processes (same as -p).</span><br><span class="line"></span><br><span class="line">  PerfCounter.print display the counters exposed by this process</span><br><span class="line">  -f  read and execute commands from the file</span><br><span class="line">  -l  list JVM processes on the local machine</span><br><span class="line">  -h  this help</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">jcmd 23808 help</span><br><span class="line"></span><br><span class="line">23808:</span><br><span class="line">The following commands are available:</span><br><span class="line">JFR.stop</span><br><span class="line">JFR.start</span><br><span class="line">JFR.dump</span><br><span class="line">JFR.check</span><br><span class="line">VM.native_memory</span><br><span class="line">VM.check_commercial_features</span><br><span class="line">VM.unlock_commercial_features</span><br><span class="line">ManagementAgent.stop</span><br><span class="line">ManagementAgent.start_local</span><br><span class="line">ManagementAgent.start</span><br><span class="line">GC.rotate_log</span><br><span class="line">Thread.print #打印出堆栈跟踪的线程</span><br><span class="line">GC.class_stats</span><br><span class="line">GC.class_histogram #打印存活对象，数据可能较多，可以将输出重定向到文件，占用最多内存的类在顶部列出，并且类以降序列出。</span><br><span class="line">GC.heap_dump #生成hprof文件，打印出堆内存信息</span><br><span class="line">GC.run_finalization</span><br><span class="line">GC.run</span><br><span class="line">VM.uptime #系统运行时间，单位秒</span><br><span class="line">VM.flags #系统启动参数</span><br><span class="line">VM.system_properties #虚拟机所有系统属性，可能数百行信息</span><br><span class="line">VM.command_line </span><br><span class="line">VM.version #打印完整的HotSpot和JDK版本ID</span><br><span class="line">help</span><br><span class="line"></span><br><span class="line">For more information about a specific command use &#x27;help &lt;command&gt;&#x27;.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>命令示例</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看Java进程,jps也具有此功能</span></span><br><span class="line">jcmd -l</span><br><span class="line"></span><br><span class="line">13264 org.jetbrains.idea.maven.server.RemoteMavenServer</span><br><span class="line">23376 sun.tools.jcmd.JCmd -l</span><br><span class="line">23808 com.guwukeji.live.LiveApplication</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看启动参数,jps也具有此功能 jps -lvm</span></span><br><span class="line">jcmd 23808 VM.flags</span><br><span class="line"></span><br><span class="line">23808:</span><br><span class="line">-XX:-BytecodeVerificationLocal -XX:-BytecodeVerificationRemote -XX:CICompilerCount=3 -XX:InitialHeapSize=266338304 -XX:+ManagementServer -XX:MaxHeapSize=4250927104 -XX:MaxNewSize=1416626176 -XX:MinHeapDeltaBytes=524288 -XX:NewSize=88604672 -XX:OldSize=177733632 -XX:TieredStopAtLevel=1 -XX:+UseCompressedClassPointers -XX:+UseCompressedOops -XX:-UseLargePagesIndividualAllocation -XX:+UseParallelGC</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看存活对象,也可以使用jmap命令</span></span><br><span class="line">jcmd 23808 GC.class_histogram</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">导出堆内存快照,jmap也可以导出【jmap -dump:live,file=demo.hprof】</span></span><br><span class="line">jcmd 23080 GC.heap_dump demo.hprof</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看线程栈,jstack也可以</span></span><br><span class="line">jcmd 23808 Thread.print</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-3-2-jinfo"><a href="#2-3-2-jinfo" class="headerlink" title="2.3.2 jinfo"></a>2.3.2 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jinfo.html#BCGEBFDD">jinfo</a></h5><p>jinfo命令显示指定的Java进程或核心文件或远程调试服务器的Java配置信息。 配置信息包括Java系统属性和Java虚拟机（JVM）命令行标志。 如果指定的进程在64位JVM上运行，则可能需要指定-J-d64选项，例如：jinfo -J-d64 -sysprops pid。</p>
+<p>此实用程序不受支持，在以后的JDK版本中可能不可用。 </p>
+<ul>
+<li>使用</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Usage:</span><br><span class="line">    jinfo [option] &lt;pid&gt;</span><br><span class="line">        (to connect to running process)</span><br><span class="line">    jinfo [option] &lt;executable &lt;core&gt;</span><br><span class="line">        (to connect to a core file)</span><br><span class="line">    jinfo [option] [server_id@]&lt;remote server IP or hostname&gt;</span><br><span class="line">        (to connect to remote debug server)</span><br><span class="line"></span><br><span class="line">where &lt;option&gt; is one of:</span><br><span class="line">    -flag &lt;name&gt;         to print the value of the named VM flag</span><br><span class="line">    -flag [+|-]&lt;name&gt;    to enable or disable the named VM flag</span><br><span class="line">    -flag &lt;name&gt;=&lt;value&gt; to set the named VM flag to the given value</span><br><span class="line">    -flags               to print VM flags</span><br><span class="line">    -sysprops            to print Java system properties</span><br><span class="line">    &lt;no option&gt;          to print both of the above</span><br><span class="line">    -h | -help           to print this help message</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-3-3-jhat"><a href="#2-3-3-jhat" class="headerlink" title="2.3.3 jhat***"></a>2.3.3 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jhat.html#CIHHJAGE">jhat***</a></h5><p>hat命令解析Java堆转储文件并启动Web服务器。 通过jhat命令，您可以使用自己喜欢的Web浏览器浏览堆转储。 jhat命令支持预先设计的查询，例如显示已知类MyClass的所有实例和对象查询语言（OQL）。 OQL与SQL类似，除了查询堆转储。 可从jhat命令显示的OQL帮助页面获得OQL帮助。 使用默认端口，可以从http：&#x2F;&#x2F; localhost：7000 &#x2F; oqlhelp &#x2F;获得OQL帮助。</p>
+<ul>
+<li>使用</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Usage:  jhat [-stack &lt;bool&gt;] [-refs &lt;bool&gt;] [-port &lt;port&gt;] [-baseline &lt;file&gt;] [-debug &lt;int&gt;] [-version] [-h|-help] &lt;file&gt;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">stack:关闭跟踪对象分配调用堆栈,默认开启；refs:关闭对对象引用的跟踪,默认开启；</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">-J:如果显示内存不够用，可以自定义JVM堆内存大小</span></span><br><span class="line"></span><br><span class="line">        -J&lt;flag&gt;          Pass &lt;flag&gt; directly to the runtime system. For</span><br><span class="line">                          example, -J-mx512m to use a maximum heap size of 512MB</span><br><span class="line">        -stack false:     Turn off tracking object allocation call stack.</span><br><span class="line">        -refs false:      Turn off tracking of references to objects</span><br><span class="line">        -port &lt;port&gt;:     Set the port for the HTTP server.  Defaults to 7000</span><br><span class="line">        -exclude &lt;file&gt;:  Specify a file that lists data members that should</span><br><span class="line">                          be excluded from the reachableFrom query.</span><br><span class="line">        -baseline &lt;file&gt;: Specify a baseline object dump.  Objects in</span><br><span class="line">                          both heap dumps with the same ID and same class will</span><br><span class="line">                          be marked as not being &quot;new&quot;.</span><br><span class="line">        -debug &lt;int&gt;:     Set debug level.</span><br><span class="line">                            0:  No debug output</span><br><span class="line">                            1:  Debug hprof file parsing</span><br><span class="line">                            2:  Debug hprof file parsing, no server</span><br><span class="line">        -version          Report version number</span><br><span class="line">        -h|-help          Print this help and exit</span><br><span class="line">        &lt;file&gt;            The file to read</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>命令示例</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">jhat -J-Xmx200M demo.hprof</span><br><span class="line"></span><br><span class="line">Reading from demo.hprof...</span><br><span class="line">Dump file created Fri May 08 14:45:09 CST 2020</span><br><span class="line">Snapshot read, resolving...</span><br><span class="line">Resolving 537895 objects...</span><br><span class="line">Chasing references, expect 107 dots...........................................................................................................</span><br><span class="line">Eliminating duplicate references...........................................................................................................</span><br><span class="line">Snapshot resolved.</span><br><span class="line">Started HTTP server on port 7000</span><br><span class="line">Server is ready.</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-3-4-jmap"><a href="#2-3-4-jmap" class="headerlink" title="2.3.4 jmap**"></a>2.3.4 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jmap.html#CEGCECJB">jmap**</a></h5><p><strong>Note:</strong> This utility is <strong>unsupported</strong> and might not be available in future releases of the JDK. </p>
+<p><strong>jmap命令打印指定进程，核心文件或远程调试服务器的共享对象内存映射或堆内存详细信息。</strong> 如果指定的进程在64位Java虚拟机（JVM）上运行，则可能需要指定-J-d64选项，例如：jmap -J-d64 -heap pid。</p>
+<p>注意：此实用程序不受支持，在以后的JDK版本中可能不可用。</p>
+<ul>
+<li>使用</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">Usage:</span><br><span class="line">    jmap [option] &lt;pid&gt;</span><br><span class="line">        (to connect to running process)</span><br><span class="line">    jmap [option] &lt;executable &lt;core&gt;</span><br><span class="line">        (to connect to a core file)</span><br><span class="line">    jmap [option] [server_id@]&lt;remote server IP or hostname&gt;</span><br><span class="line">        (to connect to remote debug server)</span><br><span class="line"></span><br><span class="line">where &lt;option&gt; is one of:</span><br><span class="line">    &lt;none&gt;               to print same info as Solaris pmap</span><br><span class="line">    -heap                to print java heap summary</span><br><span class="line">    -histo[:live]        to print histogram of java object heap; if the &quot;live&quot;</span><br><span class="line">                         suboption is specified, only count live objects</span><br><span class="line">    -clstats             to print class loader statistics</span><br><span class="line">    -finalizerinfo       to print information on objects awaiting finalization</span><br><span class="line">    -dump:&lt;dump-options&gt; to dump java heap in hprof binary format</span><br><span class="line">                         dump-options:</span><br><span class="line">                           live         dump only live objects; if not specified,</span><br><span class="line">                                        all objects in the heap are dumped.</span><br><span class="line">                           format=b     binary format</span><br><span class="line">                           file=&lt;file&gt;  dump heap to &lt;file&gt;</span><br><span class="line">                         Example: jmap -dump:live,format=b,file=heap.bin &lt;pid&gt;</span><br><span class="line">    -F                   force. Use with -dump:&lt;dump-options&gt; &lt;pid&gt; or -histo</span><br><span class="line">                         to force a heap dump or histogram when &lt;pid&gt; does not</span><br><span class="line">                         respond. The &quot;live&quot; suboption is not supported</span><br><span class="line">                         in this mode.</span><br><span class="line">    -h | -help           to print this help message</span><br><span class="line">    -J&lt;flag&gt;             to pass &lt;flag&gt; directly to the runtime system</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>options参数说明</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-heap #打印Java堆概要信息，包括使用的GC算法、堆配置参数和各代中堆内存使用情况；</span><br><span class="line">-histo[:live] #打印Java堆中对象直方图，通过该图可以获取每个class的对象数目，占用内存大小和类全名信息，带上:live，则只统计活着的对象；</span><br><span class="line">-permstat #打印永久代统计信息；</span><br><span class="line">-finalizerinfo #打印等待回收的对象信息</span><br><span class="line">-dump:[live,] format=b, file=filename #以hprof二进制格式将Java堆信息输出到文件内，该文件可以用MAT、VisualVM或jhat等工具查看；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>命令示例</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">jmap -dump:live,format=b,file=demo2.hprof 23808</span><br><span class="line"></span><br><span class="line">Dumping heap to D:\ide_file\snow\demo2.hprof ...</span><br><span class="line">Heap dump file created</span><br></pre></td></tr></table></figure>
+
+<p>注意：jmap -dump:live,format&#x3D;b,file&#x3D;a.log pid 执行这个命令，JVM会将整个heap的信息dump写入到一个文件，heap如果比较大的话，就会导致这个过程比较耗时，并且执行的过程中为了保证dump的信息是可靠的，所以会暂停应用</p>
+<h5 id="2-3-5-jsadebugd"><a href="#2-3-5-jsadebugd" class="headerlink" title="2.3.5 jsadebugd"></a>2.3.5 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jsadebugd.html#BHBCGGGH">jsadebugd</a></h5><h5 id="2-3-6-jstack"><a href="#2-3-6-jstack" class="headerlink" title="2.3.6 jstack**"></a>2.3.6 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jstack.html#BABGJDIF">jstack**</a></h5><p><strong>jstack命令为指定的Java进程，核心文件或远程调试服务器打印Java线程的Java堆栈跟踪</strong>。 对于每个Java框架，将打印完整的类名，方法名，字节码索引（BCI）和行号（如果有）。 使用-m选项，jstack命令可使用程序计数器（PC）来打印所有线程的Java和本机帧。 对于每个本机帧，将打印最接近PC的本机符号（如果有）。 C ++杂乱无章的名称不会被删除。 要对C ++名称进行拆散，可以将此命令的输出通过管道传递到c ++ filt。 当指定的进程在64位Java虚拟机上运行时，您可能需要指定-J-d64选项，例如：jstack -J-d64 -m pid。</p>
+<p>如果java程序崩溃生成core文件，jstack工具可以用来获得core文件的java stack和native stack的信息，从而可以轻松地知道java程序是如何崩溃和在程序何处发生问题。另外，jstack工具还可以附属到正在运行的java程序中，看到当时运行的java程序的java stack和native stack的信息, 如果现在运行的java程序呈现hung的状态，jstack是非常有用的。</p>
+<ul>
+<li>使用</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Usage:</span><br><span class="line">    jstack [-l] &lt;pid&gt;</span><br><span class="line">        (to connect to running process)</span><br><span class="line">    jstack -F [-m] [-l] &lt;pid&gt;</span><br><span class="line">        (to connect to a hung process)</span><br><span class="line">    jstack [-m] [-l] &lt;executable&gt; &lt;core&gt;</span><br><span class="line">        (to connect to a core file)</span><br><span class="line">    jstack [-m] [-l] [server_id@]&lt;remote server IP or hostname&gt;</span><br><span class="line">        (to connect to a remote debug server)</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">-F:当’jstack [-l] pid’没有相应的时候强制打印栈信息</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">-l:长列表. 打印关于锁的附加信息,例如属于java.util.concurrent的ownable synchronizers列表.</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">-m:打印java和native c/c++框架的所有栈信息.</span></span><br><span class="line">Options:</span><br><span class="line">    -F  to force a thread dump. Use when jstack &lt;pid&gt; does not respond (process is hung)</span><br><span class="line">    -m  to print both java and native frames (mixed mode)</span><br><span class="line">    -l  long listing. Prints additional information about locks</span><br><span class="line">    -h or -help to print this help message</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/liuxinghao/article/details/70805900">JDK 工具一览</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/">Java Platform, Standard Edition Tools Reference(Java平台,标准版工具参考)</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://dongyulong.online">Dong Yulong</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://dongyulong.online/posts/f5fbf762/">https://dongyulong.online/posts/f5fbf762/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://dongyulong.online" target="_blank">Dong Yulong</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JDK%E5%B7%A5%E5%85%B7/">JDK工具</a><a class="post-meta__tags" href="/tags/jconsole/">jconsole</a><a class="post-meta__tags" href="/tags/jvisualvm/">jvisualvm</a></div><div class="post_share"><div class="social-share" data-image="/files/image/cover_top/Java/java-cpu.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/e99d6679/"><img class="prev-cover" src="/files/image/cover_top/Internet/proyx.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">浅谈各种代理</div></div></a></div><div class="next-post pull-right"><a href="/posts/4612c954/"><img class="next-cover" src="/files/image/cover_top/Java/java-jvm.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">JVM实战故障排查</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Valine</span><span class="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81JDK%E5%B7%A5%E5%85%B7%E5%88%86%E7%B1%BB"><span class="toc-text">一、JDK工具分类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E8%AF%A6%E8%A7%A3"><span class="toc-text">二、常用工具详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%9B%91%E6%8E%A7Java%E7%A8%8B%E5%BA%8F%E5%B7%A5%E5%85%B7%EF%BC%88GUI%E5%B7%A5%E5%85%B7%EF%BC%89"><span class="toc-text">2.1 监控Java程序工具（GUI工具）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E7%9B%91%E6%8E%A7JVM%E7%9A%84%E5%B7%A5%E5%85%B7"><span class="toc-text">2.2 监控JVM的工具</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-1-jps"><span class="toc-text">2.2.1 jps**</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-2-jstat"><span class="toc-text">2.2.2 jstat***</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-3-jstatd"><span class="toc-text">2.2.3 jstatd</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-4-jmc"><span class="toc-text">2.2.4 jmc</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7"><span class="toc-text">2.3 故障排查工具</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-1-jcmd"><span class="toc-text">2.3.1 jcmd***</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-2-jinfo"><span class="toc-text">2.3.2 jinfo</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-3-jhat"><span class="toc-text">2.3.3 jhat***</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-4-jmap"><span class="toc-text">2.3.4 jmap**</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-5-jsadebugd"><span class="toc-text">2.3.5 jsadebugd</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-6-jstack"><span class="toc-text">2.3.6 jstack**</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%EF%BC%9A"><span class="toc-text">参考：</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('/img/%E5%B8%B8%E7%94%A8Java%E5%B7%A5%E5%85%B7/top.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2022 By Dong Yulong</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="https://beian.miit.gov.cn/" rel="external nofollow noreferrer" target="_blank" style="color:#f72b07"> <img class="icp-icon" src="/files/image/them/icp.png"/><span>备案号:京ICP备2022020892号-1</span></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'jQFJ7kWQ84M1iue5gPhpw88Q-gzGzoHsz',
+      appKey: '9B4rhGzXDnjtHbicyotBmHLw',
+      avatar: 'monsterid',
+      serverURLs: 'https://waline.dongyulong.online',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script>function addGitalkSource () {
+  const ele = document.createElement('link')
+  ele.rel = 'stylesheet'
+  ele.href= 'https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css'
+  document.getElementsByTagName('head')[0].appendChild(ele)
+}
+
+function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: '380b87852ebd7003908f',
+      clientSecret: '490a7d907f4843e7290019040c5c96a9e501cc70',
+      repo: 'gittalk',
+      owner: 'dongyulongnet',
+      admin: ['dongyulongnet'],
+      id: '83de7245bb9f361783fc4a034caff5de',
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    addGitalkSource()
+    getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Valine' === 'Gitalk' || !false) {
+  if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
